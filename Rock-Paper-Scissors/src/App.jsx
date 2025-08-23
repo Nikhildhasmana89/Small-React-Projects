@@ -1,57 +1,64 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const choice = ["Rock", "Paper", "scissor"];
+  const choices = ["Rock", "Paper", "Scissors"];
   const [playerstate, setplayerstate] = useState(null);
   const [computerstate, setcomputerstate] = useState(null);
   const [resultstate, setresultstate] = useState("");
 
-  const Playerchoice = (choice) => {
-     setplayerstate(choice);
-  
-     
-     const computerchoice = choice[Math.floor(Math.random * choice.length)];
-     setcomputerstate(random);
-     
-     if (choice === computerchoice) {
-       console.log("Its Draw");
-      } else if (
-        (choice === "Rock" && computerchoice === "Scissor") ||
-        (choice === "Paper" && computerchoice === "Rock") ||
-        (choice === "Scissor" && computerchoice === "Paper")
-  ) {
-    //console.log('You Win');
-    resultstate('You Win')
-  } else {
-    //console.log('You Lose');
-    resultstate('You Lose')
-    
-  }
-};
-  
+  const gamedata = (choice) => {
+    setplayerstate(choice);
+
+    const computerchoice = choices[Math.floor(Math.random() * choices.length)];
+    setcomputerstate(computerchoice);
+
+    if (choice === computerchoice) {
+      setresultstate("It's a Draw!");
+    } else if (
+      (choice === "Rock" && computerchoice === "Scissors") ||
+      (choice === "Paper" && computerchoice === "Rock") ||
+      (choice === "Scissors" && computerchoice === "Paper")
+    ) {
+      setresultstate("You Win!");
+    } else {
+      setresultstate("You Lose!");
+    }
+  };
+
   return (
-    <>
-      <div className="w-full h-screen bg-black">
-        <div>
-          <h1>Rock-Paper-Scissor Game </h1>
-          <button
-            onClick={() => playerstate('Rock')}
-            className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition"
-          >
-            Rock
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
-            Paper
-          </button>
-          <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded hover:bg-blue-700 transition">
-            Scissor
-          </button>
-        </div>
+    <div className="flex flex-col items-center mt-10">
+      <h1 className="text-4xl font-bold mb-8">Rock-Paper-Scissors</h1>
+
+      <div className="flex gap-6">
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105"
+          onClick={() => gamedata("Rock")}
+        >
+          🪨 Rock
+        </button>
+
+        <button
+          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105"
+          onClick={() => gamedata("Paper")}
+        >
+          📄 Paper
+        </button>
+
+        <button
+          className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105"
+          onClick={() => gamedata("Scissors")}
+        >
+          ✂️ Scissors
+        </button>
       </div>
-    </>
+
+      <div className="mt-6 text-lg">
+        <p>Your choice: {playerstate}</p>
+        <p>Computer choice: {computerstate}</p>
+        <p className="font-bold">Result: {resultstate}</p>
+      </div>
+    </div>
   );
 }
 
