@@ -26,6 +26,4 @@
 
   React
 
-  JavaScript
-
-  CSS
+  Tailwind CSS
