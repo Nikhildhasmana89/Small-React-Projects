@@ -1,54 +1,110 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
 
 function App() {
-  
+  const [input, setinput] = useState("");
 
-  const [number, setnumber] = useState('')
-  const [display, setdisplay] = useState('')
+  const ButtonClick = (value) => {
+    setinput(input + value);
+  };
 
-  const DisplayEle = (e) => {
-      setnumber(e.target.value)
-  }
+  const logic = () => {
+    try {
+      setinput(eval(input).toString());
+    } catch {
+      setinput("Error");
+    }
+  };
+
+  const clear = () => {
+    setinput("");
+  };
 
   return (
-   <>
-   <div className='w-full h-screen bg-black'>
+    <>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h1 className="text-2xl font-bold mb-4">Simple Calculator</h1>
 
-   <div>
-    <input 
-    readOnly
-    value={number}
-    className="border text-white border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
-    type="text" />
-   </div>
-   <div>
-    <button 
-    onClick={() => DisplayEle()}
-    className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      1</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      2</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      3</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      4</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      5</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      6</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      7</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      8</button>
-    <button className="bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-blue-600 active:bg-blue-700 transition duration-300">
-      9</button>
-   </div>
-    </div>
-   </>
-  )
+        <div className="bg-white p-4 rounded-2xl shadow-lg w-72">
+          <input
+            value={input}
+            readOnly
+            type="text"
+            className="w-full mb-3 p-2 text-right text-lg border rounded-lg bg-gray-50"
+          />
+
+          <div className="grid grid-cols-4 gap-2">
+            <button onClick={() => ButtonClick("1")} className="btn">
+              1
+            </button>
+            <button onClick={() => ButtonClick("2")} className="btn">
+              2
+            </button>
+            <button onClick={() => ButtonClick("3")} className="btn">
+              3
+            </button>
+            <button onClick={clear} className="btn bg-red-400 text-white">
+              C
+            </button>
+
+            <button onClick={() => ButtonClick("4")} className="btn">
+              4
+            </button>
+            <button onClick={() => ButtonClick("5")} className="btn">
+              5
+            </button>
+            <button onClick={() => ButtonClick("6")} className="btn">
+              6
+            </button>
+            <button
+              onClick={() => ButtonClick("/")}
+              className="btn bg-blue-400 text-white"
+            >
+              /
+            </button>
+
+            <button onClick={() => ButtonClick("7")} className="btn">
+              7
+            </button>
+            <button onClick={() => ButtonClick("8")} className="btn">
+              8
+            </button>
+            <button onClick={() => ButtonClick("9")} className="btn">
+              9
+            </button>
+            <button
+              onClick={() => ButtonClick("*")}
+              className="btn bg-blue-400 text-white"
+            >
+              *
+            </button>
+
+            <button onClick={() => ButtonClick("0")} className="btn col-span-2">
+              0
+            </button>
+            <button
+              onClick={() => ButtonClick("-")}
+              className="btn bg-blue-400 text-white"
+            >
+              -
+            </button>
+            <button
+              onClick={() => ButtonClick("+")}
+              className="btn bg-blue-400 text-white"
+            >
+              +
+            </button>
+
+            <button
+              onClick={logic}
+              className="btn bg-green-500 text-white col-span-4"
+            >
+              =
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default App
+export default App;
