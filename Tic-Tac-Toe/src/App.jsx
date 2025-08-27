@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 function App() {
+  const [board, setboard] = useState(Array(9).fill(""));
   const [input, setinput] = useState(false);
-  const [result, setresult] = useState("");
+   const [result, setresult] = useState(""); 
 
   const winningCombinations = [
     [1, 2, 3],
@@ -15,15 +16,34 @@ function App() {
     [3, 5, 7],
   ];
 
-  const gamelogic = (e) => {
-    if (e.target.innerHTML !== "") return;
-    if (input === false) {
-      setinput((e.target.innerHTML = "O"));
-      setinput(true);
-    } else {
-      setinput((e.target.innerHTML = "X"));
-      setinput(false);
+  const gamelogic = (index) => {
+    if (board[index] !== "") return;
+
+    const newboard = [...board];
+    newboard[index] = input ? "X" : "O";
+    setboard(newboard);
+    setinput(!input);
+
+    const winner = checkwinner(newboard);
+    if (winner) {
+      setresult(winner + " wins! ");
     }
+  };
+
+  const checkwinner = (board) => {
+    let winner = null;
+
+    winningCombinations.forEach((combo) => {
+      let a = combo[0] - 1;
+      let b = combo[1] - 1;
+      let c = combo[2] - 1;
+
+      if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
+        winner = board[a];
+      }
+    });
+
+    return winner;
   };
 
   return (
@@ -33,43 +53,46 @@ function App() {
       </h1>
       <div className="grid grid-cols-3 gap-4 w-48 mx-auto mt-10">
         <button
-          onClick={gamelogic}
+          onClick={() => gamelogic(0)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[0]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(1)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[1]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(2)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[2]}</button>
 
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(3)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[3]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(4)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[4]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(5)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[5]}</button>
 
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(6)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[6]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(7)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[7]}</button>
         <button
-          onClick={gamelogic}
+           onClick={() => gamelogic(8)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        ></button>
+        >{board[8]}</button>
+      </div>
+      <div className="text-center mb-4 text-2xl font-bold text-green-700">
+        {result}
       </div>
     </>
   );
