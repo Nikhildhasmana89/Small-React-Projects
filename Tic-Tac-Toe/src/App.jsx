@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 function App() {
-  const [board, setboard] = useState(Array(9).fill(""));
+  const [move, setmove] = useState(Array(9).fill(""));
   const [input, setinput] = useState(false);
-   const [result, setresult] = useState(""); 
+  const [result, setresult] = useState("");
 
   const winningCombinations = [
     [1, 2, 3],
@@ -17,20 +17,20 @@ function App() {
   ];
 
   const gamelogic = (index) => {
-    if (board[index] !== "") return;
+    if (move[index] !== "") return;
 
-    const newboard = [...board];
-    newboard[index] = input ? "X" : "O";
-    setboard(newboard);
+    const newmove = [...move];
+    newmove[index] = input ? "X" : "O";
+    setmove(newmove);
     setinput(!input);
 
-    const winner = checkwinner(newboard);
+    const winner = checkwinner(newmove);
     if (winner) {
       setresult(winner + " wins! ");
     }
   };
 
-  const checkwinner = (board) => {
+  const checkwinner = (move) => {
     let winner = null;
 
     winningCombinations.forEach((combo) => {
@@ -38,8 +38,8 @@ function App() {
       let b = combo[1] - 1;
       let c = combo[2] - 1;
 
-      if (board[a] !== "" && board[a] === board[b] && board[a] === board[c]) {
-        winner = board[a];
+      if (move[a] !== "" && move[a] === move[b] && move[a] === move[c]) {
+        winner = move[a];
       }
     });
 
@@ -55,41 +55,59 @@ function App() {
         <button
           onClick={() => gamelogic(0)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[0]}</button>
+        >
+          {move[0]}
+        </button>
         <button
-           onClick={() => gamelogic(1)}
+          onClick={() => gamelogic(1)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[1]}</button>
+        >
+          {move[1]}
+        </button>
         <button
-           onClick={() => gamelogic(2)}
+          onClick={() => gamelogic(2)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[2]}</button>
+        >
+          {move[2]}
+        </button>
 
         <button
-           onClick={() => gamelogic(3)}
+          onClick={() => gamelogic(3)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[3]}</button>
+        >
+          {move[3]}
+        </button>
         <button
-           onClick={() => gamelogic(4)}
+          onClick={() => gamelogic(4)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[4]}</button>
+        >
+          {move[4]}
+        </button>
         <button
-           onClick={() => gamelogic(5)}
+          onClick={() => gamelogic(5)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[5]}</button>
+        >
+          {move[5]}
+        </button>
 
         <button
-           onClick={() => gamelogic(6)}
+          onClick={() => gamelogic(6)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[6]}</button>
+        >
+          {move[6]}
+        </button>
         <button
-           onClick={() => gamelogic(7)}
+          onClick={() => gamelogic(7)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[7]}</button>
+        >
+          {move[7]}
+        </button>
         <button
-           onClick={() => gamelogic(8)}
+          onClick={() => gamelogic(8)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >{board[8]}</button>
+        >
+          {move[8]}
+        </button>
       </div>
       <div className="text-center mb-4 text-2xl font-bold text-green-700">
         {result}
