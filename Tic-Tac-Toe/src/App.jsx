@@ -55,59 +55,41 @@ function App() {
         <button
           onClick={() => gamelogic(0)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[0]}
-        </button>
+        >{move[0]}</button>
         <button
           onClick={() => gamelogic(1)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[1]}
-        </button>
+        >{move[1]}</button>
         <button
           onClick={() => gamelogic(2)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[2]}
-        </button>
+        >{move[2]}</button>
 
         <button
           onClick={() => gamelogic(3)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[3]}
-        </button>
+        >{move[3]}</button>
         <button
           onClick={() => gamelogic(4)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[4]}
-        </button>
+        >{move[4]}</button>
         <button
           onClick={() => gamelogic(5)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[5]}
-        </button>
+        >{move[5]}</button>
 
         <button
           onClick={() => gamelogic(6)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[6]}
-        </button>
+        >{move[6]}</button>
         <button
           onClick={() => gamelogic(7)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[7]}
-        </button>
+        >{move[7]}</button>
         <button
           onClick={() => gamelogic(8)}
           className="w-16 h-16 flex items-center justify-center text-2xl font-bold border border-gray-400 bg-white hover:bg-gray-100 active:bg-gray-300 transition-all rounded-md shadow-sm"
-        >
-          {move[8]}
-        </button>
+        >{move[8]}</button>
       </div>
       <div className="text-center mb-4 text-2xl font-bold text-green-700">
         {result}
