@@ -10,80 +10,93 @@ function App() {
   const passwordgenerator = useCallback(() => {
     let pass = "";
     let str = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-    let specialchar = '<>,.:;"{}[]+=_-!@#$%^&*()*-';
-    let number = "0123456789";
-    if (number) str += number;
-    if (character) str += specialchar;
+    if (number) str += "1234567890";
+    if (character) str += '!@#$%^&*()_+=?><,./":;{}[]';
 
     for (let i = 1; i <= length; i++) {
-      char = Math.floor(Math.random() * str.length + 1);
+      let char = Math.floor(Math.random() * str.length + 1);
       pass += str.charAt(char);
     }
     setpassword(pass);
-  }, [length, character, setpassword, number]);
+  }, [length, character, number]);
 
-  // useEffect(() => {
-  //   passwordgenerator();
-  // }, [length, number, character, passwordgenerator]);
+  const copybutton = useCallback(() => {
+    window.navigator.clipboard.writeText(password);
+    alert("Password copied!");
+  }, [password]);
+
+  useEffect(() => {
+    passwordgenerator();
+  }, [length, number, character, passwordgenerator]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-600">
-      <div className="bg-white p-6 rounded-2xl shadow-xl w-96">
-        <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
-           Password Generator
+    <>
+      <div className="text-center my-6">
+        <h1 className="text-4xl font-extrabold text-gray-800 drop-shadow-lg">
+          Password Generator
         </h1>
+        <p className="text-gray-500 mt-2 text-sm">
+          Create strong and secure passwords instantly
+        </p>
+      </div>
+      <div className="flex flex-col gap-4 p-4 max-w-sm mx-auto bg-white rounded-xl shadow-md">
+        <input
+          value={password}
+          readOnly
+          placeholder="Password"
+          type="text"
+          className="p-2 border rounded w-full"
+        />
 
-        <div className="flex mb-4">
+        <button
+          onClick={() => {
+            copybutton();
+          }}
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+        >
+          Copy
+        </button>
+
+        <div>
           <input
-            type="text"
-            value={password}
-            placeholder="Your password will appear here"
-            className="flex-1 px-3 py-2 border rounded-l-lg focus:outline-none"
-            readOnly
+            min={6}
+            max={20}
+            value={length}
+            onChange={(e) => {
+              setlength(e.target.value);
+            }}
+            type="range"
+            className="w-full accent-blue-500"
           />
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">
-            Copy
-          </button>
+          <div className="text-sm text-gray-600 mt-1">Length: {length}</div>
         </div>
 
-        <div className="space-y-3 mb-4">
-          <label className="flex items-center space-x-2">
-            <input
+        <label className="flex items-center gap-2">
+          <input
+            value={character}
+            onChange={() => {
+              setcharacter((prev) => !prev);
+            }}
+            type="checkbox"
+            className="w-4 h-4 accent-blue-500"
+          />
+          <span className="text-sm">Include Symbols</span>
+        </label>
+
+        <label className="flex items-center gap-2">
+          <input
+            value={number}
+            defaultChecked={number}
             onChange={() => {
               setnumber((prev) => !prev);
-            }} 
-            type="checkbox" 
-            className="w-4 h-4 accent-purple-600" />
-            <span className="text-gray-700">Include Numbers</span>
-          </label>
-          <label className="flex items-center space-x-2">
-            <input 
-             onChange={() => {
-              setcharacter((prev) => !prev);
-            }} 
-            type="checkbox" className="w-4 h-4 accent-purple-600" />
-            <span className="text-gray-700">
-              Characters
-            </span>
-          </label>
-        </div>
-
-        {/* Password Length with +/- buttons */}
-        <div className="mb-6">
-          <label className="block font-medium text-gray-700 mb-2">
-            Password Length:{" "}
-            <span className="font-bold text-purple-600">12</span>
-          </label>
-          <input
-            type="range"
-            min="4"
-            max="32"
-            defaultValue="12"
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+            }}
+            type="checkbox"
+            className="w-4 h-4 accent-blue-500"
           />
-        </div>
+          <span className="text-sm">Include Numbers</span>
+        </label>
       </div>
-    </div>
+    </>
   );
 }
 
